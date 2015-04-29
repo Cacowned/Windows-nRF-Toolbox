@@ -75,7 +75,7 @@ namespace Common.Service.GattService
 					return false;
 				var txCharacteristic = this.UARTGattService.GetCharacteristics(ToolboxIdentifications.GattCharacteristicsUuid.TX).FirstOrDefault();
 				var buffer = IRXCharacteristic.TalkTo(text);
-				await txCharacteristic.WriteValueAsync(buffer);
+				await txCharacteristic.WriteValueAsync(buffer, GattWriteOption.WriteWithoutResponse);
 				return true;
 			}
 			catch (ApplicationArgumentException e)
@@ -113,7 +113,7 @@ namespace Common.Service.GattService
 			if (EchoReceived != null)
 				EchoReceived(result);
 		}
-
+         
 		public string Name
 		{
 			get
